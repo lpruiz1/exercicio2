@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Produto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .confirmation {
+            margin-top: 20px;
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="productForm" onsubmit="return showConfirmation()">
+        <h3>Cadastro de Produto</h3>
+        <input type="text" id="productName" placeholder="Nome do Produto" required>
+        <input type="number" id="productPrice" placeholder="Preço" required step="0.01">
+        <input type="number" id="productQuantity" placeholder="Quantidade" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="confirmationMessage" class="confirmation" style="display: none;"></div>
+
+    <script>
+        function showConfirmation() {
+            const name = document.getElementById('productName').value;
+            const price = parseFloat(document.getElementById('productPrice').value).toFixed(2); // Converte para float e formata
+            const quantity = document.getElementById('productQuantity').value;
+
+            const messageDiv = document.getElementById('confirmationMessage');
+            messageDiv.textContent = `Produto "${name}" cadastrado com sucesso! Preço: R$${price}, Quantidade: ${quantity}`;
+            messageDiv.style.display = 'block'; // Exibe a mensagem
+
+            // Limpa os campos do formulário
+            document.getElementById('productForm').reset();
+
+            return false; // Impede o envio real do formulário para efeito de demonstração
+        }
+    </script>
+</body>
+</html>
